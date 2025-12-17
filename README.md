@@ -7,8 +7,14 @@
 
 **Gym OS** is a comprehensive, web-based management solution designed for modern fitness centers. It streamlines member onboarding, subscription plan management, and revenue tracking through a secure, role-based dashboard.
 
-> **Live Demo / Screenshots:**
-> *(Upload your screenshots here, e.g., Dashboard.png, MemberList.png)*
+> ** Screenshots:**
+> <img width="1896" height="473" alt="image" src="https://github.com/user-attachments/assets/b32b528b-50fc-406b-82d7-1d3d4d4c95a1" />
+<img width="1898" height="520" alt="image" src="https://github.com/user-attachments/assets/8cf7c704-aa0c-4678-b4d8-758872a51c6e" />
+<img width="1859" height="870" alt="image" src="https://github.com/user-attachments/assets/3127e59b-c40d-41c3-a16b-a1e4129d1bd3" />
+
+
+
+
 
 ## 🚀 Key Features
 
@@ -49,7 +55,7 @@ Since this project uses a "Code-First" approach, the database will create itself
 
 1.  **Clone the Repository**
     ```bash
-    git clone [https://github.com/YOUR_USERNAME/Gym-OS-Management-System.git](https://github.com/YOUR_USERNAME/Gym-OS-Management-System.git)
+    git clone [https://github.com/AsadShibli/Gym-OS-Management-System.git](https://github.com/AsadShibli/Gym-OS-Management-System.git)
     ```
 
 2.  **Open in Visual Studio**
@@ -64,27 +70,12 @@ Since this project uses a "Code-First" approach, the database will create itself
 
 5.  **First-Time Admin Setup**
     * The database starts empty.
-    * Navigate to `/Identity/Account/Register` in your browser URL bar.
+    * Navigate to `/Identity/Account/Register` in your browser URL bar or click register link in the login page.
     * Create an Admin account (e.g., `admin@gymos.com`).
     * Once logged in, go to **Plans** to create your first subscription tier, then start adding **Members**.
 
 ---
 
-## 📸 Screenshots
-
-### Admin Dashboard
-*(Drag and drop your dashboard screenshot here)*
-
-### Member Directory & Search
-*(Drag and drop your member list screenshot here)*
-
----
-
-## 👤 Author
-
-**MD. Asadullah Shibli**
-* **GitHub:** [YourProfile](https://github.com/YourUsername)
-* **Program:** B.Sc. in Computer Science and Engineering
 
 ---
 *© 2025 Gym OS. All Rights Reserved.*
