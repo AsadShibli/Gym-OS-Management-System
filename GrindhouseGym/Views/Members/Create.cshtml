@@ -1,0 +1,77 @@
+﻿@model Member
+
+@{
+    ViewData["Title"] = "Register Member";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-primary text-white py-3">
+                    <h4 class="mb-0 fw-bold">
+                        <i class="bi bi-person-plus-fill me-2"></i> Register New Member
+                    </h4>
+                </div>
+                <div class="card-body p-5">
+                    <form asp-action="Create" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="FullName" class="form-control" placeholder="John Doe" />
+                                    <label asp-for="FullName">Full Name</label>
+                                    <span asp-validation-for="FullName" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="Email" class="form-control" placeholder="name@example.com" />
+                                    <label asp-for="Email">Email Address</label>
+                                    <span asp-validation-for="Email" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <input asp-for="JoinDate" class="form-control" />
+                                    <label asp-for="JoinDate">Join Date</label>
+                                    <span asp-validation-for="JoinDate" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select asp-for="PlanId" class="form-select" asp-items="ViewBag.PlanId">
+                                        <option value="" selected disabled>-- Select a Membership Tier --</option>
+                                    </select>
+                                    <label asp-for="PlanId">Membership Plan</label>
+                                    <span asp-validation-for="PlanId" class="text-danger"></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="form-label fw-bold text-muted small">PROFILE PHOTO (OPTIONAL)</label>
+                            <input type="file" name="profileFile" class="form-control" accept="image/*" />
+                            <div class="form-text">Supported formats: JPG, PNG.</div>
+                        </div>
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-light border">Cancel</a>
+                            <button type="submit" class="btn btn-primary px-4 fw-bold">Register Member</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

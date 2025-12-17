@@ -1,0 +1,104 @@
+﻿@{
+    ViewData["Title"] = "Home";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    /* === ADMIN VIEW (Logged In) === */
+    <div class="container py-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-primary fw-bold">Admin Dashboard</h2>
+          
+        </div>
+
+        <div class="row g-4">
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body p-4 border-start border-5 border-primary">
+                        <h6 class="text-uppercase text-muted fw-bold mb-2">Total Members</h6>
+                        <div class="d-flex align-items-center">
+                            <h2 class="display-4 fw-bold mb-0 me-3">@ViewBag.TotalMembers</h2>
+                            <div class="bg-light rounded-circle p-3 text-primary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-people-fill" viewBox="0 0 16 16">
+                                    <path d="M7 14s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H7Zm4-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Zm-5.784 6A2.238 2.238 0 0 1 5 13c0-1.355.68-2.75 1.936-3.72A6.325 6.325 0 0 0 5 9c-4 0-5 3-5 4s1 1 1 1h4.216ZM4.5 8a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body p-4 border-start border-5 border-success">
+                        <h6 class="text-uppercase text-muted fw-bold mb-2">Projected Revenue</h6>
+                        <div class="d-flex align-items-center">
+                            <h2 class="display-4 fw-bold mb-0 me-3 text-success">$@ViewBag.TotalRevenue</h2>
+                            <div class="bg-light rounded-circle p-3 text-success">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" class="bi bi-currency-dollar" viewBox="0 0 16 16">
+                                    <path d="M4 10.781c.148 1.667 1.513 2.85 3.591 3.003V15h1.043v-1.216c2.27-.179 3.678-1.438 3.678-3.3 0-1.59-.947-2.51-2.956-3.028l-.722-.187V3.467c1.122.11 1.879.714 2.07 1.616h1.47c-.166-1.6-1.54-2.748-3.54-2.875V1H7.591v1.233c-1.939.23-3.27 1.472-3.27 3.156 0 1.454.966 2.483 2.661 2.917l.61.162v4.031c-1.149-.17-1.94-.8-2.131-1.718H4zm3.391-3.836c-1.043-.263-1.6-.825-1.6-1.616 0-.944.704-1.641 1.8-1.828v3.495l-.2-.05zm1.591 1.872c1.287.323 1.852.859 1.852 1.769 0 1.097-.826 1.828-2.2 1.939V8.73l.348.086z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    /* === PUBLIC VIEW (Logged Out) === */
+
+    <div class="text-center py-5 mb-5" style="background: linear-gradient(180deg, #ffffff 0%, #f8f9fa 100%); border-bottom: 1px solid #e9ecef;">
+        <h1 class="display-3 fw-bold text-dark mb-3" style="letter-spacing: -1px;">
+            Manage your gym, <span class="text-primary">effortlessly.</span>
+        </h1>
+        <p class="lead text-muted mb-4 mx-auto" style="max-width: 600px;">
+            The all-in-one platform for membership tracking, revenue analytics, and operational control.
+        </p>
+        <a class="btn btn-primary btn-lg px-5 py-3 rounded-pill shadow-sm fw-bold" href="/Identity/Account/Login">
+            Launch Dashboard
+        </a>
+    </div>
+
+    <div class="container mb-5">
+        <div class="row g-5 text-center">
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#0d6efd" class="bi bi-speedometer2" viewBox="0 0 16 16">
+                        <path d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z" />
+                        <path fill-rule="evenodd" d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z" />
+                    </svg>
+                </div>
+                <h5 class="fw-bold">Real-Time Analytics</h5>
+                <p class="text-muted small">Instant insights into monthly revenue and member growth trends.</p>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#0d6efd" class="bi bi-person-badge" viewBox="0 0 16 16">
+                        <path d="M6.5 2a.5.5 0 0 0 0 1h3a.5.5 0 0 0 0-1h-3zM11 8a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                        <path d="M4.5 0A2.5 2.5 0 0 0 2 2.5V14a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V2.5A2.5 2.5 0 0 0 11.5 0h-7zM3 2.5A1.5 1.5 0 0 1 4.5 1h7A1.5 1.5 0 0 1 13 2.5v10.795a4.2 4.2 0 0 0-.776-.492C11.392 12.387 10.063 12 8 12s-3.392.387-4.224.803a4.2 4.2 0 0 0-.776.492V2.5z" />
+                    </svg>
+                </div>
+                <h5 class="fw-bold">Seamless Onboarding</h5>
+                <p class="text-muted small">Dynamic plan selection and rapid relational data entry.</p>
+            </div>
+
+            <div class="col-md-4">
+                <div class="mb-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="#0d6efd" class="bi bi-shield-lock" viewBox="0 0 16 16">
+                        <path d="M5.338 1.59a61.44 61.44 0 0 0-2.837.856.481.481 0 0 0-.328.39c-.554 4.157.726 7.19 2.253 9.188a10.725 10.725 0 0 0 2.287 2.233c.346.244.652.42.893.533.12.057.218.095.293.118a.55.55 0 0 0 .101.025.615.615 0 0 0 .1-.025c.076-.023.174-.061.294-.118.24-.113.547-.29.893-.533a10.726 10.726 0 0 0 2.287-2.233c1.527-1.997 2.807-5.031 2.253-9.188a.48.48 0 0 0-.328-.39c-.651-.213-1.75-.56-2.837-.855C9.552 1.29 8.531 1.067 8 1.067c-.53 0-1.552.223-2.662.524zM5.072.56C6.157.265 7.31 0 8 0s1.843.265 2.928.56c1.11.3 2.229.655 2.887.87a1.54 1.54 0 0 1 1.044 1.262c.596 4.477-.787 7.795-2.465 9.99a11.775 11.775 0 0 1-2.517 2.453 7.159 7.159 0 0 1-1.048.625.88.88 0 0 1-.57.179.88.88 0 0 1-.57-.179 7.158 7.158 0 0 1-1.048-.625 11.777 11.777 0 0 1-2.517-2.453C1.928 10.487.545 7.169 1.141 2.692A1.54 1.54 0 0 1 2.185 1.43 62.456 62.456 0 0 1 5.072.56z" />
+                        <path d="M9.5 6.5a1.5 1.5 0 0 1-1 1 1.5 1.5 0 1 1 0-3 1.5 1.5 0 0 1 1 1z" />
+                        <path d="M5.5 10.5A1.5 1.5 0 0 1 7 9h2a1.5 1.5 0 0 1 1.5 1.5v2A1.5 1.5 0 0 1 9 14H7a1.5 1.5 0 0 1-1.5-1.5v-2z" />
+                    </svg>
+                </div>
+                <h5 class="fw-bold">Secure Infrastructure</h5>
+                <p class="text-muted small">Protected via ASP.NET Core Identity authentication.</p>
+            </div>
+
+        </div>
+    </div>
+}

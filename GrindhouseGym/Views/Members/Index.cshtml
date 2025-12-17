@@ -1,0 +1,106 @@
+﻿@model IEnumerable<Member>
+
+@{
+    ViewData["Title"] = "Member Directory";
+}
+
+<div class="container mt-4">
+    <div class="row align-items-center mb-4">
+        <div class="col-md-6">
+            <h2 class="fw-bold text-primary">Member Directory</h2>
+            <p class="text-muted mb-0">Manage active gym memberships.</p>
+        </div>
+        <div class="col-md-6">
+            <div class="d-flex gap-2 justify-content-md-end">
+                <div class="input-group" style="max-width: 300px;">
+                    <span class="input-group-text bg-white border-end-0">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search text-muted" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z" />
+                        </svg>
+                    </span>
+                    <input type="text" id="searchBox" onkeyup="searchTable()" class="form-control border-start-0" placeholder="Search members...">
+                </div>
+
+                <a asp-action="Create" class="btn btn-primary shadow-sm">
+                    + New Member
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow border-0">
+        <div class="card-body p-0">
+            <table class="table table-hover table-striped mb-0 align-middle" id="membersTable">
+                <thead class="bg-light">
+                    <tr>
+                        <th class="ps-4 py-3">Full Name</th>
+                        <th class="py-3">Email Address</th>
+                        <th class="py-3">Join Date</th>
+                        <th class="py-3">Current Plan</th>
+                        <th class="text-end pe-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td class="ps-4 fw-bold text-dark name-cell">
+                                @Html.DisplayFor(modelItem => item.FullName)
+                            </td>
+                            <td class="text-muted">
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                <span class="text-secondary small">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-calendar3 me-1" viewBox="0 0 16 16">
+                                        <path d="M14 0H2a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2zM1 3.857C1 3.384 1.448 3 2 3h12c.552 0 1 .384 1 .857v10.286c0 .473-.448.857-1 .857H2c-.552 0-1-.384-1-.857V3.857z" />
+                                    </svg>
+                                    @item.JoinDate.ToString("MMM dd, yyyy")
+                                </span>
+                            </td>
+                            <td>
+                                <span class="badge bg-info text-dark bg-opacity-10 px-3 py-1 border border-info border-opacity-25 rounded-pill">
+                                    @Html.DisplayFor(modelItem => item.Plan.Name)
+                                </span>
+                            </td>
+                            <td class="text-end pe-4">
+                                <div class="btn-group">
+                                    <a asp-action="Edit" asp-route-id="@item.MemberId" class="btn btn-sm btn-outline-secondary" title="Edit">
+                                        <i class="bi bi-pencil"></i> Edit
+                                    </a>
+                                    <a asp-action="Details" asp-route-id="@item.MemberId" class="btn btn-sm btn-outline-primary" title="View">
+                                        Details
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@item.MemberId" class="btn btn-sm btn-outline-danger" title="Remove">
+                                        Delete
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<script>
+    function searchTable() {
+        var input = document.getElementById("searchBox");
+        var filter = input.value.toUpperCase();
+        var table = document.getElementById("membersTable");
+        var tr = table.getElementsByTagName("tr");
+
+        for (var i = 1; i < tr.length; i++) {
+            var td = tr[i].getElementsByTagName("td")[0]; // Column 0 is Name
+            if (td) {
+                var txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>

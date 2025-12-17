@@ -1,0 +1,98 @@
+﻿@model Member
+
+@{
+    ViewData["Title"] = "Edit Profile";
+}
+
+<div class="container mt-5">
+    <div class="row">
+
+        <div class="col-md-4 mb-4">
+            <div class="card shadow border-0 text-center p-4 h-100">
+                <div class="mb-3">
+                    @if (!string.IsNullOrEmpty(Model.ProfileImage))
+                    {
+                        <img src="~/images/profiles/@Model.ProfileImage"
+                             class="rounded-circle shadow-sm"
+                             style="width: 150px; height: 150px; object-fit: cover;"
+                             alt="Profile Photo" />
+                    }
+                    else
+                    {
+                        <div class="bg-light rounded-circle d-inline-flex align-items-center justify-content-center" style="width: 150px; height: 150px;">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" fill="#adb5bd" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z" />
+                            </svg>
+                        </div>
+                    }
+                </div>
+
+                <h5 class="fw-bold">@Model.FullName</h5>
+                <p class="text-muted small">@Model.Email</p>
+
+                <label for="uploadBox" class="btn btn-outline-primary btn-sm mt-2 cursor-pointer">
+                    <i class="bi bi-camera"></i> Change Photo
+                </label>
+            </div>
+        </div>
+
+        <div class="col-md-8">
+            <div class="card shadow border-0">
+                <div class="card-header bg-white border-bottom py-3">
+                    <h5 class="mb-0 fw-bold text-primary">Edit Account Details</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Edit" enctype="multipart/form-data">
+                        <div asp-validation-summary="ModelOnly" class="text-danger mb-3"></div>
+                        <input type="hidden" asp-for="MemberId" />
+
+                        <div class="mb-3">
+                            <label class="form-label fw-bold text-muted small">UPDATE PHOTO</label>
+                            <input type="file" id="uploadBox" name="profileFile" class="form-control" accept="image/*" />
+                            <span class="text-muted small">Supported: JPG, PNG, GIF</span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="FullName" class="form-label fw-bold text-muted small">FULL NAME</label>
+                            <input asp-for="FullName" class="form-control" />
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="Email" class="form-label fw-bold text-muted small">EMAIL ADDRESS</label>
+                            <input asp-for="Email" class="form-control" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="JoinDate" class="form-label fw-bold text-muted small">JOIN DATE</label>
+                                <input asp-for="JoinDate" class="form-control" />
+                                <span asp-validation-for="JoinDate" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="PlanId" class="form-label fw-bold text-muted small">CURRENT PLAN</label>
+                                <select asp-for="PlanId" class="form-select" asp-items="ViewBag.PlanId"></select>
+                                <span asp-validation-for="PlanId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <hr class="my-4 opacity-25">
+
+                        <div class="d-flex justify-content-end gap-2">
+                            <a asp-action="Index" class="btn btn-light border">Cancel</a>
+                            <button type="submit" class="btn btn-success px-4">Save Changes</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

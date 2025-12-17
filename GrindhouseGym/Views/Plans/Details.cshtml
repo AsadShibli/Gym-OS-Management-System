@@ -1,0 +1,44 @@
+﻿@model Plan
+
+@{
+    ViewData["Title"] = "Plan Details";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow-lg border-0">
+                <div class="card-header bg-success text-white text-center py-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" fill="currentColor" class="bi bi-tag-fill mb-2" viewBox="0 0 16 16">
+                        <path d="M2 1a1 1 0 0 0-1 1v4.586a1 1 0 0 0 .293.707l7 7a1 1 0 0 0 1.414 0l4.586-4.586a1 1 0 0 0 0-1.414l-7-7A1 1 0 0 0 6.586 1H2zm4 3.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                    </svg>
+                    <h3 class="mb-0">@Model.Name</h3>
+                    <small class="text-white-50">Membership Tier</small>
+                </div>
+
+                <div class="card-body p-5 text-center">
+                    <h5 class="text-muted text-uppercase fw-bold mb-3">Monthly Fee</h5>
+
+                    <div class="display-4 fw-bold text-success mb-3">
+                        $@Html.DisplayFor(model => model.Fee)
+                    </div>
+
+                    <p class="text-muted">
+                        Active plan available for new member registration.
+                    </p>
+                </div>
+
+                <div class="card-footer bg-light p-3 text-center">
+                    <a asp-action="Edit" asp-route-id="@Model?.PlanId" class="btn btn-success px-4 me-2">
+                        Edit Plan
+                    </a>
+                    <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                        Back to List
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
