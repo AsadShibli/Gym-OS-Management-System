@@ -7,7 +7,7 @@
 
 **Gym OS** is a comprehensive, web-based management solution designed for modern fitness centers. It streamlines member onboarding, subscription plan management, and revenue tracking through a secure, role-based dashboard.
 
->  **Screenshots:**
+## Screenshots
 > <img width="1896" height="473" alt="image" src="https://github.com/user-attachments/assets/b32b528b-50fc-406b-82d7-1d3d4d4c95a1" />
 <img width="1898" height="520" alt="image" src="https://github.com/user-attachments/assets/8cf7c704-aa0c-4678-b4d8-758872a51c6e" />
 <img width="1859" height="870" alt="image" src="https://github.com/user-attachments/assets/3127e59b-c40d-41c3-a16b-a1e4129d1bd3" />
