@@ -1,0 +1,49 @@
+﻿@model GrindhouseGym.Models.Trainer
+
+@{
+    ViewData["Title"] = "Add Trainer";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card shadow border-0">
+                <div class="card-header bg-success text-white py-3">
+                    <h5 class="mb-0 fw-bold">Add New Staff / Trainer</h5>
+                </div>
+                <div class="card-body p-4">
+                    <form asp-action="Create" enctype="multipart/form-data">
+
+                        <div class="mb-4 text-center">
+                            <label class="form-label fw-bold text-muted small d-block text-start">TRAINER PHOTO</label>
+                            <input type="file" name="profileFile" class="form-control" accept="image/*" />
+                            <div class="form-text text-start">Optional. Supported: JPG, PNG.</div>
+                        </div>
+
+                        <div class="form-floating mb-3">
+                            <input asp-for="FullName" class="form-control" placeholder="Name" />
+                            <label asp-for="FullName">Full Name</label>
+                            <span asp-validation-for="FullName" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="PhoneNumber" class="form-control" placeholder="Phone" />
+                            <label asp-for="PhoneNumber">Phone Number</label>
+                            <span asp-validation-for="PhoneNumber" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Specialization" class="form-control" placeholder="Spec" />
+                            <label asp-for="Specialization">Specialization (e.g. Yoga)</label>
+                            <span asp-validation-for="Specialization" class="text-danger"></span>
+                        </div>
+                        <div class="form-floating mb-3">
+                            <input asp-for="Shift" class="form-control" placeholder="Shift" />
+                            <label asp-for="Shift">Shift (e.g. 9AM - 5PM)</label>
+                            <span asp-validation-for="Shift" class="text-danger"></span>
+                        </div>
+                        <button type="submit" class="btn btn-success w-100 py-2 fw-bold">Save Trainer</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

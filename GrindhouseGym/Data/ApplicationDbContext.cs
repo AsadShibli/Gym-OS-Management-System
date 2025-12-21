@@ -15,5 +15,7 @@ namespace GrindhouseGym.Data
         // These tell the database: "Create tables named 'Plans' and 'Members'"
         public DbSet<Plan> Plans { get; set; }
         public DbSet<Member> Members { get; set; }
+
+        public DbSet<Trainer> Trainers { get; set; }
     }
 }
