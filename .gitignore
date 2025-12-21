@@ -1,6 +1,30 @@
+# === BUILD ARTIFACTS ===
 bin/
 obj/
+[Release]/
+[Debug]/
+
+# === IDE SETTINGS ===
 .vs/
+.vscode/
 *.user
 *.suo
+*.sln.docstates
+
+# === DYNAMIC USER ASSETS (CRITICAL) ===
+# We want to keep the folder structure but ignore the actual uploaded photos
+wwwroot/images/profiles/*
+wwwroot/images/trainers/*
+!wwwroot/images/profiles/.gitkeep
+!wwwroot/images/trainers/.gitkeep
+
+# === DATABASE & SECRETS ===
+*.mdf
+*.ldf
+*.db
 appsettings.Development.json
+*.local.json
+
+# === OS JUNK ===
+Thumbs.db
+.DS_Store
