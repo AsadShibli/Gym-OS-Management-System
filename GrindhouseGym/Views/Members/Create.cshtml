@@ -53,6 +53,29 @@
                             </div>
                         </div>
 
+                        <div class="row mb-4">
+                            <div class="col-md-6">
+                                <div class="form-floating mb-3">
+                                    <select asp-for="Duration" class="form-select bg-light border-0">
+                                        <option value="1">1 Month (Standard)</option>
+                                        <option value="3">3 Months (Quarterly)</option>
+                                        <option value="6">6 Months (Save 10%)</option>
+                                        <option value="12">1 Year (Best Value - Save 20%)</option>
+                                    </select>
+                                    <label asp-for="Duration" class="fw-bold text-muted small">DURATION</label>
+                                    <span asp-validation-for="Duration" class="text-danger"></span>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-floating">
+                                    <select asp-for="TrainerId" class="form-select" asp-items="ViewBag.TrainerId">
+                                        <option value="">-- No Personal Trainer --</option>
+                                    </select>
+                                    <label asp-for="TrainerId">Assigned Trainer (Optional)</label>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="mb-4">
                             <label class="form-label fw-bold text-muted small">PROFILE PHOTO (OPTIONAL)</label>
                             <input type="file" name="profileFile" class="form-control" accept="image/*" />

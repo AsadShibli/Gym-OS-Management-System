@@ -9,12 +9,12 @@ using Microsoft.AspNetCore.Authorization;
 using GrindhouseGym.Data;
 using GrindhouseGym.Models;
 using Microsoft.AspNetCore.Hosting;
-using System.IO; // Required for Path
-using Microsoft.AspNetCore.Http; // Required for IFormFile
+using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace GrindhouseGym.Controllers
 {
-    [Authorize] // Locks the entire controller. Only logged-in users can enter.
+    [Authorize] // Secure: Only admins can access
     public class MembersController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -29,25 +29,24 @@ namespace GrindhouseGym.Controllers
         // GET: Members
         public async Task<IActionResult> Index()
         {
-            var applicationDbContext = _context.Members.Include(m => m.Plan);
+            // FINAL FIX: Include Trainer so names appear in the list
+            var applicationDbContext = _context.Members
+                                               .Include(m => m.Plan)
+                                               .Include(m => m.Trainer);
             return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Members/Details/5
         public async Task<IActionResult> Details(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var member = await _context.Members
                 .Include(m => m.Plan)
+                .Include(m => m.Trainer) // FINAL FIX: Include Trainer on profile card
                 .FirstOrDefaultAsync(m => m.MemberId == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
+
+            if (member == null) return NotFound();
 
             return View(member);
         }
@@ -56,12 +55,12 @@ namespace GrindhouseGym.Controllers
         public IActionResult Create()
         {
             ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "Name");
+            // FINAL FIX: Load Trainers for the dropdown
+            ViewData["TrainerId"] = new SelectList(_context.Trainers, "TrainerId", "FullName");
             return View();
         }
 
         // POST: Members/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(Member member, IFormFile? profileFile)
@@ -72,10 +71,8 @@ namespace GrindhouseGym.Controllers
                 if (profileFile != null)
                 {
                     string uploadsFolder = Path.Combine(_webHostEnvironment.WebRootPath, "images/profiles");
-                    // Create folder if not exists
                     Directory.CreateDirectory(uploadsFolder);
 
-                    // Unique filename to prevent overwrite
                     string uniqueFileName = Guid.NewGuid().ToString() + "_" + profileFile.FileName;
                     string filePath = Path.Combine(uploadsFolder, uniqueFileName);
 
@@ -92,29 +89,25 @@ namespace GrindhouseGym.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "Name", member.PlanId);
+            ViewData["TrainerId"] = new SelectList(_context.Trainers, "TrainerId", "FullName", member.TrainerId);
             return View(member);
         }
 
         // GET: Members/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var member = await _context.Members.FindAsync(id);
-            if (member == null)
-            {
-                return NotFound();
-            }
+            if (member == null) return NotFound();
+
             ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "Name", member.PlanId);
+            // FINAL FIX: Load Trainers so the Edit Dropdown isn't empty!
+            ViewData["TrainerId"] = new SelectList(_context.Trainers, "TrainerId", "FullName", member.TrainerId);
             return View(member);
         }
 
         // POST: Members/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, Member member, IFormFile? profileFile)
@@ -125,7 +118,6 @@ namespace GrindhouseGym.Controllers
             {
                 try
                 {
-                    // Fetch the existing member to preserve data (like the old image if no new one is uploaded)
                     var existingMember = await _context.Members.AsNoTracking().FirstOrDefaultAsync(m => m.MemberId == id);
 
                     if (profileFile != null)
@@ -140,7 +132,7 @@ namespace GrindhouseGym.Controllers
                         {
                             await profileFile.CopyToAsync(fileStream);
                         }
-                        member.ProfileImage = uniqueFileName; // Set new image
+                        member.ProfileImage = uniqueFileName;
                     }
                     else
                     {
@@ -159,24 +151,21 @@ namespace GrindhouseGym.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["PlanId"] = new SelectList(_context.Plans, "PlanId", "Name", member.PlanId);
+            ViewData["TrainerId"] = new SelectList(_context.Trainers, "TrainerId", "FullName", member.TrainerId);
             return View(member);
         }
 
         // GET: Members/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            if (id == null) return NotFound();
 
             var member = await _context.Members
                 .Include(m => m.Plan)
+                .Include(m => m.Trainer) // Include trainer info before deleting
                 .FirstOrDefaultAsync(m => m.MemberId == id);
-            if (member == null)
-            {
-                return NotFound();
-            }
+
+            if (member == null) return NotFound();
 
             return View(member);
         }

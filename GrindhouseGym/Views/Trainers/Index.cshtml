@@ -1,0 +1,71 @@
+﻿@model IEnumerable<GrindhouseGym.Models.Trainer>
+
+@{
+    ViewData["Title"] = "Staff & Trainers";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+            <h2 class="fw-bold text-primary">Staff & Trainers</h2>
+            <p class="text-muted">Manage gym trainers and their shifts.</p>
+        </div>
+        <a asp-action="Create" class="btn btn-success shadow-sm">
+            <i class="bi bi-person-plus-fill"></i> Add New Trainer
+        </a>
+    </div>
+
+    <div class="row g-4">
+        @foreach (var item in Model)
+        {
+            <div class="col-md-6 col-lg-4">
+                <div class="card shadow-sm border-0 h-100">
+                    <div class="card-body">
+                        <div class="d-flex align-items-center mb-3">
+                            <div class="me-3">
+                                @if (!string.IsNullOrEmpty(item.ProfileImage))
+                                {
+                                    <img src="~/images/trainers/@item.ProfileImage" class="rounded-circle shadow-sm" style="width: 60px; height: 60px; object-fit: cover;" />
+                                }
+                                else
+                                {
+                                    <div class="bg-primary bg-opacity-10 p-3 rounded-circle text-primary">
+                                        <i class="bi bi-person-vcard fs-3"></i>
+                                    </div>
+                                }
+                            </div>
+                            <div>
+                                <h5 class="card-title fw-bold mb-0">@item.FullName</h5>
+                                <small class="text-muted">@item.Specialization</small>
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <small class="text-uppercase text-muted fw-bold" style="font-size: 0.7rem;">Shift Time</small>
+                            <div class="d-flex align-items-center text-dark">
+                                <i class="bi bi-clock me-2 text-warning"></i> @item.Shift
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <small class="text-uppercase text-muted fw-bold" style="font-size: 0.7rem;">Contact</small>
+                            <div class="text-dark">@item.PhoneNumber</div>
+                        </div>
+
+                        <div class="d-grid gap-2">
+                            <a asp-action="Details" asp-route-id="@item.TrainerId" class="btn btn-outline-info">
+                                <i class="bi bi-eye-fill me-1"></i> View Profile & Roster
+                            </a>
+
+                            <div class="d-flex gap-2">
+                                <a asp-action="Edit" asp-route-id="@item.TrainerId" class="btn btn-sm btn-outline-primary w-100">Edit</a>
+                                <a asp-action="Delete" asp-route-id="@item.TrainerId" class="btn btn-sm btn-outline-danger w-100">Delete</a>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>

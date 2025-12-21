@@ -1,22 +1,64 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
 }
+
+/* === UTILITY CLASSES === */
+.cursor-pointer {
+    cursor: pointer;
+}
+
+/* === PRINT MODE STYLES === */
+/* These rules only activate when the user presses Ctrl+P or clicks the Print button */
+@media print {
+    /* 1. Hide the Interface (Sidebar, Navbar, Footer) */
+    header, footer, .sidebar, .navbar, .border-bottom {
+        display: none !important;
+    }
+
+    /* 2. Hide Buttons & Inputs (Clean Report Look) */
+    .btn, button, .form-control, .no-print {
+        display: none !important;
+    }
+
+    /* 3. Reset Layout Constraints so the content fills the A4 paper */
+    body, main, .container, .row, .col-md-8, .card {
+        width: 100% !important;
+        max-width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        flex: 0 0 100% !important;
+        box-shadow: none !important; /* Remove shadows to save ink */
+        border: none !important; /* Remove borders for cleaner look */
+    }
+
+    /* 4. Hide the Left Column (Trainer Bio) to save space? 
+       Uncomment the line below if you ONLY want the table. 
+       Currently, I left it visible so the header prints too. */
+    /* .col-md-4 { display: none !important; } */
+
+    /* 5. Ensure text is black for sharp printing */
+    body {
+        background-color: white !important;
+        color: black !important;
+    }
+}
+

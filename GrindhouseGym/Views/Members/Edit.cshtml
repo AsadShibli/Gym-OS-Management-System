@@ -78,6 +78,26 @@
                             </div>
                         </div>
 
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="Duration" class="form-label fw-bold text-muted small">SUBSCRIPTION DURATION</label>
+                                <select asp-for="Duration" class="form-select">
+                                    <option value="1">1 Month (Standard)</option>
+                                    <option value="3">3 Months (Quarterly)</option>
+                                    <option value="6">6 Months (Save 10%)</option>
+                                    <option value="12">1 Year (Best Value - Save 20%)</option>
+                                </select>
+                                <span asp-validation-for="Duration" class="text-danger"></span>
+                            </div>
+
+                            <div class="col-md-6 mb-3">
+                                <label asp-for="TrainerId" class="form-label fw-bold text-muted small">ASSIGNED TRAINER</label>
+                                <select asp-for="TrainerId" class="form-select" asp-items="ViewBag.TrainerId">
+                                    <option value="">-- No Personal Trainer --</option>
+                                </select>
+                            </div>
+                        </div>
+
                         <hr class="my-4 opacity-25">
 
                         <div class="d-flex justify-content-end gap-2">
